@@ -148,6 +148,17 @@ class LinkedList:
       temp.next = before
       before = temp
       temp = after
+      
+  # Exercises
+  # Write a method to find and return the middle node in the Linked List WITHOUT using the length attribute.
+  def find_middle_node(self):
+    slow = self.head
+    fast = self.head
+    while fast is not None and fast.next is not None:
+        slow = slow.next
+        fast = fast.next.next
+    return slow
+    
     
     
     
@@ -167,6 +178,7 @@ my_linked_list.set_value(1, 460)
 my_linked_list.insert(1, 20)
 my_linked_list.remove(2)
 my_linked_list.reverse()
+my_linked_list.find_middle_node()
 
 # my_linked_list.pop()
 my_linked_list.print_list()
