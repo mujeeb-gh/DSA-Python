@@ -30,11 +30,6 @@ class LinkedList:
     self.tail = new_node
     self.length = 1
     
-  def print_list(self):
-    temp = self.head
-    while temp is not None:
-      print(temp.value)
-      temp = temp.next
       
   def append(self, value):
     new_node = Node(value)
@@ -48,17 +43,17 @@ class LinkedList:
     return
     
   def pop(self):
-    if self.length == 0:
+    if self.length == 0: # if LL had 0 items
       return None
     temp = self.head
     pre = self.head
-    while temp.next:
+    while temp.next:  # while temp.next is not None
       pre = temp
       temp = temp.next
     self.tail = pre
     self.tail.next = None
     self.length -=1
-    if self.length == 0:
+    if self.length == 0: # if LL had 1 item
       self.head = None
       self.tail = None
     return temp.value
@@ -131,7 +126,7 @@ class LinkedList:
       self.pop()
     prev = self.get(index - 1)
     # temp = self.get(index) # this would work but it is O(n), and there's a O(1) alternative
-    temp = prev.next # this is the O(n) alternative
+    temp = prev.next # this is the O(1) alternative
     prev.next = temp.next
     temp.next = None
     self.length -= 1
@@ -149,7 +144,7 @@ class LinkedList:
       before = temp
       temp = after
       
-  # Exercises
+  # Exercises (⚡Interview Question)
   # Write a method to find and return the middle node in the Linked List WITHOUT using the length attribute.
   def find_middle_node(self):
     slow = self.head
@@ -157,11 +152,22 @@ class LinkedList:
     while fast is not None and fast.next is not None:
         slow = slow.next
         fast = fast.next.next
-    return slow
-    
-    
-    
-    
+    return slow.value
+  
+  # Write a method called has_loop that is part of the linked list class. The method should be able to detect if there is a cycle or loop present in the linked list.
+  def has_loop(self):
+    slow = self.head
+    fast = self.head
+    while fast is not None and fast.next is not None:
+      slow = slow.next
+      fast = fast.next.next
+      if slow == fast:
+        return True
+    return False
+  
+  # Remove Duplicates
+  def remove_duplicates(self):
+    pass    
       
       
 
@@ -170,6 +176,7 @@ class LinkedList:
 my_linked_list= LinkedList(4)
 # my_linked_list.append(45)
 my_linked_list.append(90)
+my_linked_list.append(9)
 my_linked_list.prepend(23)
 my_linked_list.prepend(12)
 # my_linked_list.pop_first()
@@ -178,8 +185,10 @@ my_linked_list.set_value(1, 460)
 my_linked_list.insert(1, 20)
 my_linked_list.remove(2)
 my_linked_list.reverse()
-my_linked_list.find_middle_node()
+middle_node = my_linked_list.find_middle_node()
 
 # my_linked_list.pop()
 my_linked_list.print_list()
 print(f'\n\nLinked List length: {my_linked_list.length}')
+print(f'\nMiddle Node: {middle_node}')
+print(f'\nHas Loop: {my_linked_list.has_loop()}')
