@@ -133,7 +133,7 @@ class DoublyLinkedList:
     return
   
   def reverse(self):
-    
+    pass
       
       
     
